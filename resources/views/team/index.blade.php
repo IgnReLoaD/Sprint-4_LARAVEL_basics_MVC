@@ -4,6 +4,6 @@
 <!-- dins la club/edit.blade.php: document.getElementById('teams_categories') -->
 @section('teams_categories')
 
-<h2>Vista Index de CLUB</h2>
+<h2>Vista Index de TEAM</h2>
 
 @endsection

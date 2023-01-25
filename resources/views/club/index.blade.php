@@ -1,12 +1,18 @@
 <!-- la plantillabase inclou bootstrapp i head i body  -->
-@extends('layouts.plantillabase');
+@extends('layouts.plantillabase')
+
+<!-- de la web de Datatables.net/examples/styling, 2 links, el bootstrap ya está en plantillabase, falta el otro:  -->
+@section('css')
+<link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+@endsection
 
 <!-- dins la plantillabase: document.getElementById('contenido') -->
 @section('contenido')
     <h2>Vista Index de CLUB</h2>
-    <a href="clubs/create" class="btn btn-primary">Nou club</a>
-    <table class="table table-dark table-striped mt-4">
-        <thead>
+    <a href="clubs/create" class="btn btn-success">Nou club</a>
+
+    <table id="clubs" class="table table-success table-striped table-bordered shadow-lg mt-4" style="width:80%">
+        <thead class="bg-success text-success">
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nom</th>
@@ -24,7 +30,7 @@
                 <td>{{ $fieldsetClub->foundation_year_month }}</td>
                 <td>
                     <form action="{{ route ('clubs.destroy',$fieldsetClub->id) }}" method="post">
-                        <a href="/clubs/{{$fieldsetClub->id}}/edit" class="btn btn-info">editar</a>
+                        <a href="/clubs/{{$fieldsetClub->id}}/edit" class="btn btn-success">editar</a>
                         @csrf 
                         @method('DELETE')
                         <button class="btn btn-danger">borrar</button>
@@ -34,4 +40,18 @@
             @endforeach
         </tbody>
     </table>
+
+@section('js')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+    // html id de Table li hem dit 'clubs'
+    $('#clubs').DataTable();
+});
+</script>
+@endsection
+
 @endsection

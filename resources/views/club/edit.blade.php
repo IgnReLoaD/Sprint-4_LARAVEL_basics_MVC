@@ -48,12 +48,14 @@
         value="{{$club->office_address}}">
     </div>        
     <a href="/clubs" class="btn btn-secondary" tabindex="5">Cancelar</a>
-    <button type="submit" class="btn btn-primary" tabindex="6">Grabar</button>
+    <button type="submit" class="btn btn-success" tabindex="6">Grabar</button>
 </form>
 
-<!-- LLISTA DE TEAMS_CATEGORIES D'AQUEST CLUB  -->
-    <div class="container">
-        <?php include("..\team\index.blade.php") ?>
+    <!-- LLISTA DE TEAMS_CATEGORIES D'AQUEST CLUB  -->
+    <div class="container mt-6">        
+        <a href="/teams/{{$club->id}}/index" class="btn btn-success">Veure els seus equips...</a>
+        @csrf                             
     </div>
+    
 
 @endsection
