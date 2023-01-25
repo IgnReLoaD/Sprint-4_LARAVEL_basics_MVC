@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('NOM_TAULA', NomController::class)->names('nomVista');
+
+Route::resource('clubs','App\Http\Controllers\ClubController');
+Route::resource('teams','App\Http\Controllers\TeamcategoryController');
+Route::resource('players','App\Http\Controllers\PlayerController');
+Route::resource('matches','App\Http\Controllers\MatchController');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

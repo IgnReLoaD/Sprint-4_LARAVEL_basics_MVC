@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\EnumCategoryName;
 
 class CreateTeamCategoryTable extends Migration
 {
@@ -18,6 +19,7 @@ class CreateTeamCategoryTable extends Migration
             $table->integer('club_id')->unsigned();
             $table->foreign('club_id')->references('id_club')->on('clubs')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('name', array('FirstTeam', 'SecondTeam', 'Juvenil', 'Aleví', 'Cadet', 'Infantil', 'Amateur', 'Legends'));
+            // $table->unsignedInteger('name')->default(EnumCategoryName::FirstTeam->value);
             $table->enum('type', array('soccer', 'basketball', 'handball'));                        
         });
     }
