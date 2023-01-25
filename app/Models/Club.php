@@ -9,7 +9,7 @@ class Club extends Model
 {
     use HasFactory;
     // ATRIBUTS:
-    protected $fillable = ['name','foundation_year_month','palmares'];
+    protected $fillable = ['id','name','foundation_year_month','palmares','office_address'];
     public $timestamps = false;
     
     // CLUBS 1--N ARENAS (Right Join) ... hasMany()

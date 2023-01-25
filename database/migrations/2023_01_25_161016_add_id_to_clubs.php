@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddScoreToMatchesTable extends Migration
+class AddIdToClubs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddScoreToMatchesTable extends Migration
      */
     public function up()
     {
-        Schema::table('matches', function (Blueprint $table) {
-            $table->integer('id_club',6);
+        Schema::table('clubs', function (Blueprint $table) {
+            $table->id();
         });
     }
 
@@ -25,9 +25,8 @@ class AddScoreToMatchesTable extends Migration
      */
     public function down()
     {
-        Schema::table('matches', function (Blueprint $table) {
-            $table->dropColumn('score_home');
-            $table->dropColumn('score_away');
+        Schema::table('clubs', function (Blueprint $table) {
+            $table->integer('id_club',6);
         });
     }
 }

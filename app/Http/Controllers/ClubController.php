@@ -41,6 +41,7 @@ class ClubController extends Controller
         $objClub->name = $request->get('inpNom');
         $objClub->palmares = $request->get('inpPal');
         $objClub->foundation_year_month = $request->get('inpFun');
+        $objClub->office_address = $request->get('inpAdd');
 
         $objClub->save();
         return redirect('/clubs');
@@ -63,10 +64,16 @@ class ClubController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_club)
     {
-        $club = Club::find($id);
-        return view('club.edit')->with('club',$club);
+        // echo $id_club;
+        // die;
+        $objClub = Club::find($id_club);        
+        // $str_id_club = strval($id_club);
+        // echo "str_id_club = " . $str_id_club;
+        // sleep(1);
+        // $objClub = Club::where('id_club','=',strval($str_id_club));
+        return view('club.edit')->with('club',$objClub);
     }
 
     /**
@@ -78,7 +85,18 @@ class ClubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // en Create (view camps buits) ... Store (grabar) --> instanciem un New registre
+        // $objClub = new Club();
+        // en Edit (view camps plens) ... Update (grabar) --> portem un registre existent
+        $objClub = Club::find($id);
+
+        $objClub->name = $request->get('inpNom');
+        $objClub->palmares = $request->get('inpPal');
+        $objClub->foundation_year_month = $request->get('inpFun');
+        $objClub->office_address = $request->get('inpAdd');
+
+        $objClub->save();
+        return redirect('/clubs');
     }
 
     /**
@@ -89,6 +107,8 @@ class ClubController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $objClub = Club::find($id);
+        $objClub->delete();
+        return redirect('/clubs');
     }
 }

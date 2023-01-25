@@ -3,7 +3,7 @@
 
 <!-- dins la plantillabase: document.getElementById('contenido') -->
 @section('contenido')
-    <h1>Vista Index de CLUB</h1>
+    <h2>Vista Index de CLUB</h2>
     <a href="clubs/create" class="btn btn-primary">Nou club</a>
     <table class="table table-dark table-striped mt-4">
         <thead>
@@ -16,15 +16,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($recordsetClubs as $club)
+            @foreach ($recordsetClubs as $fieldsetClub)
             <tr>
-                <td>{{ $club->id_club }}</td>
-                <td>{{ $club->name }}</td>
-                <td>{{ $club->palmares }}</td>
-                <td>{{ $club->foundation_year_month }}</td>
+                <td>{{ $fieldsetClub->id }}</td>
+                <td>{{ $fieldsetClub->name }}</td>
+                <td>{{ $fieldsetClub->palmares }}</td>
+                <td>{{ $fieldsetClub->foundation_year_month }}</td>
                 <td>
-                    <a href="/clubs/{{$club->id_club}}/edit" class="btn btn-info">editar</a>
-                    <button class="btn btn-danger">borrar</button>
+                    <form action="{{ route ('clubs.destroy',$fieldsetClub->id) }}" method="post">
+                        <a href="/clubs/{{$fieldsetClub->id}}/edit" class="btn btn-info">editar</a>
+                        @csrf 
+                        @method('DELETE')
+                        <button class="btn btn-danger">borrar</button>
+                    </form>
                 </td>                
             </tr>
             @endforeach
