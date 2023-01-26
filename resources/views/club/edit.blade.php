@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-<h2>Editar club</h2>
+<h2>Vista Editar un Club</h2>
 
 <?php
     // echo "_POST[] = " . var_dump($_POST);
@@ -50,11 +50,15 @@
     <a href="/clubs" class="btn btn-secondary" tabindex="5">Cancelar</a>
     <button type="submit" class="btn btn-success" tabindex="6">Grabar</button>
 </form>
-
+<hr>
     <!-- LLISTA DE TEAMS_CATEGORIES D'AQUEST CLUB  -->
     <div class="container mt-6">        
-        <a href="/teams/{{$club->id}}/index" class="btn btn-success">Veure els seus equips...</a>
-        @csrf                             
+        <form action="{{ route ('teams/{{$club->id}}/index','App\Http\Controllers\TeamController') }}" method="post">">
+            <a href="/teams/{{$club->id}}/index" class="btn btn-success">Veure els seus equips...</a>
+            <button class="btn btn-danger">veure equips...</button>
+        </form>
+        <!-- @csrf  
+        @yield('teamsList')                            -->
     </div>
     
 

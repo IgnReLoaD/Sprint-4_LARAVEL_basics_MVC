@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\EnumCategoryName;
 use App\Enums\EnumCategoryType;
 
-class Team_category extends Model
+class Team extends Model
 {
     use HasFactory;
     // ATRIBUTS:

@@ -9,9 +9,9 @@
 <!-- dins la plantillabase: document.getElementById('contenido') -->
 @section('contenido')
     <h2>Vista Index de CLUB</h2>
-    <a href="clubs/create" class="btn btn-success">Nou club</a>
+    <a href="clubs/create" class="btn btn-success mb-6">Nou club</a>
 
-    <table id="clubs" class="table table-success table-striped table-bordered shadow-lg mt-4" style="width:80%">
+    <table id="clubs" class="table table-success table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-success text-success">
             <tr>
                 <th scope="col">ID</th>
@@ -48,9 +48,11 @@
 
 <script>
     $(document).ready(function () {
-    // html id de Table li hem dit 'clubs'
-    $('#clubs').DataTable();
-});
+        // html id de Table li hem dit 'clubs'
+        $('#clubs').DataTable({
+            "lengthMenu": [[5,10,15,-1],[5,10,15,'tots']]
+        });
+    });
 </script>
 @endsection
 

@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\Club;
+use App\Models\Team;
 
-class TeamcategoryController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_club)
     {
-        //
+        echo "TeamController ... id_club= " .$id_club;
+        // die;
+        $recordsetTeams = Team::select("*")->where('club_id','=',$id_club)->get()->sortByDesc('name');
+        // $recordsetTeams = Team::all();
+        return view('team.index')->with('recordsetTeams',$recordsetTeams);        
     }
 
     /**
