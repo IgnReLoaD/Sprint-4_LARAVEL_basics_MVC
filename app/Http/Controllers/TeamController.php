@@ -14,10 +14,14 @@ class TeamController extends Controller
      */
     public function index($id_club)
     {
-        echo "TeamController ... id_club= " .$id_club;
+        // DEBUG:
+        echo "TeamController ... id_club= " .$id_club . "<br><br>";
         // die;
-        $recordsetTeams = Team::select("*")->where('club_id','=',$id_club)->get()->sortByDesc('name');
-        // $recordsetTeams = Team::all();
+
+        $recordsetTeams = Team::select("*")->where('club_id','=',$id_club)->get()->sortByDesc('name');        
+        // DEBUG:
+        print($recordsetTeams);
+        // VIEW:
         return view('team.index')->with('recordsetTeams',$recordsetTeams);        
     }
 

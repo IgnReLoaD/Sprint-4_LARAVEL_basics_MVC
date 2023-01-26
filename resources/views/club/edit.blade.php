@@ -4,11 +4,6 @@
 
 <h2>Vista Editar un Club</h2>
 
-<?php
-    // echo "_POST[] = " . var_dump($_POST);
-    // die;
-?>
-
 <!-- FITXA DE DETALL DEL CLUB  -->
 <form action="/clubs/{{$club->id}}" method="post">
     
@@ -31,11 +26,7 @@
     <div class="mb-3">
         <label for="inpFun" class="form-label">Fundat</label>
         <input type="date" id="inpFun" name="inpFun" class="form-control" tabindex="2"
-        value="{{$club->foundation_year_month}}">
-        <?php
-            // $date = new EJ\DatePicker("datePicker");
-            // echo $date->value(new DateTime())->render();
-        ?>
+        value="{{$club->foundation_year_month}}">        
     </div>
     <div class="mb-3">
         <label for="inpPal" class="form-label">Palmares</label>
@@ -50,15 +41,14 @@
     <a href="/clubs" class="btn btn-secondary" tabindex="5">Cancelar</a>
     <button type="submit" class="btn btn-success" tabindex="6">Grabar</button>
 </form>
+<br>
 <hr>
     <!-- LLISTA DE TEAMS_CATEGORIES D'AQUEST CLUB  -->
     <div class="container mt-6">        
-        <form action="{{ route ('teams/{{$club->id}}/index','App\Http\Controllers\TeamController') }}" method="post">">
-            <a href="/teams/{{$club->id}}/index" class="btn btn-success">Veure els seus equips...</a>
-            <button class="btn btn-danger">veure equips...</button>
-        </form>
-        <!-- @csrf  
-        @yield('teamsList')                            -->
+        <a href="/clubs/{{$club->id}}/teams" class="btn btn-success">Veure els seus equips...</a>         
+
+        <!-- @csrf   -->
+        <!-- @yield('teamsList') -->
     </div>
     
 

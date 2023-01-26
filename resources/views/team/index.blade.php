@@ -1,9 +1,11 @@
+@extends('layouts.plantillabase');
+
 <!-- club/edit.blade.php ... que ja inclou la plantillabase amb bootstrapp i head i body  -->
 <!-- @extends('club.edit'); -->
-@extends('layouts.plantillabase');
 
 <!-- dins la club/edit.blade.php: document.getElementById('teams_categories') -->
 <!-- @section('teamsList') -->
+
     <h2>Vista Index de Teams de un Club</h2>
     <a href="teams/create" class="btn btn-success mb-6">Nou equip per aquest club</a>
 

@@ -3,7 +3,7 @@
 namespace App\Enums;
 
 // Team_category -> field 'name'
-enum CategoryName: int {
+enum Category: int {
     case FirstTeam = 1;
     case SecondTeam= 2;
     case Juvenil   = 3;

@@ -68,7 +68,11 @@ class ClubController extends Controller
     {
         // echo $id_club;
         // die;
+
         $objClub = Club::find($id_club);        
+        echo "el club es: " . $objClub->id . " - " . $objClub->name;
+        // die;
+
         // $str_id_club = strval($id_club);
         // echo "str_id_club = " . $str_id_club;
         // sleep(1);
