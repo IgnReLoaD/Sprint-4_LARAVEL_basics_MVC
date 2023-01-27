@@ -29,10 +29,13 @@ Route::put('clubs/{club}/update', [ClubController::class, 'update'])->name('club
 Route::delete('clubs/{club}/destroy', [TeamController::class, 'destroy'])->name('club.destroy');
 
 // TEAMS
+// Route::resource('team',TeamController::class)->names('team');
 Route::resource('clubs/{club}/teams','App\Http\Controllers\TeamController'); 
-// Route::resource('clubs/{club}/teams', TeamController::class)->names('teams');
+
 Route::get('clubs/{club}/teams', [TeamController::class, 'index'])->name('teams.list');
-Route::delete('teams', [TeamController::class, 'destroy'])->name('team.destroy');
+Route::put('clubs/{club}/teams/{team}/edit', [TeamController::class, 'edit'])->name('team.details');
+Route::put('clubs/{club}/teams/{team}/update', [ClubController::class, 'update'])->name('team.update');
+Route::delete('clubs/{club}/teams/{team}/destroy', [TeamController::class, 'destroy'])->name('teams.destroy');
 
 
 // GESTIO USUARIS

@@ -32,10 +32,16 @@
                 <td>{{ $fieldsetTeam->club_id }}</td>
                 <td>{{ $fieldsetTeam->name }}</td>
                 <td>{{ $fieldsetTeam->type }}</td>
-                <td>    
-
-                    <a href="/clubs/{{$fieldsetTeam->club_id}}/teams/{{$fieldsetTeam->id}}/edit" class="btn btn-success">editar</a>                
-
+                <td>                  
+                    <!-- <form action="{{url('clubs/ . $fieldsetTeam->club_id . /teams/ . $fieldsetTeam->id}}" method="post">  -->
+                    <!-- <form action="{{ route ('teams.destroy', $fieldsetTeam->club_id, $fieldsetTeam->id) }}" method="post">  -->
+                    <!-- <form action="{{ route ('teams.destroy', $fieldsetTeam->id) }}" method="post">  -->
+                    <!-- <form action="/clubs/{{$fieldsetTeam->club_id}}/teams/{{$fieldsetTeam->id}}/destroy" method="post"> -->
+                        <a href="/clubs/{{$fieldsetTeam->club_id}}/teams/{{$fieldsetTeam->id}}/edit" class="btn btn-success">editar</a>
+                        @csrf 
+                        @method('DELETE')
+                        <button class="btn btn-danger">borrar</button>
+                    <!-- </form> -->
                 </td>
             </tr>
             @endforeach

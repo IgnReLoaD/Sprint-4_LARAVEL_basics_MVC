@@ -1,5 +1,12 @@
 <?php
 
+//  Els 7 mètodes del Controller: Index, Create, Store, Edit, Update, Show, Destroy.
+//  ALTA:   1. CREATE (crida view details) --> 2. STORE (recull inputs, 'save', redirect)
+//  EDIT:   1. EDIT (selec registre, crida view details) --> 2. UPDATE (selec reg, recull inputs, 'save', redirect)
+//  ELIM:   1. DESTROY  (selec registre, 'delete', redirect)
+//  LISTAR: 1. INDEX (selec TOTS registres, crida view list)
+//  DETAIL: 1. SHOW (selec registre, crida view details) ... NO la utilitzo
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -36,7 +43,7 @@ class ClubController extends Controller
      */
     public function store(Request $request)
     {
-        // request conté el $_POST[input1,input2,input3...] 
+        // 'request' conté el $_POST[input1,input2,input3...] 
         $objClub = new Club();
         $objClub->name = $request->get('inpNom');
         $objClub->palmares = $request->get('inpPal');

@@ -9,7 +9,7 @@
 <!-- dins la plantillabase: document.getElementById('contenido') -->
 @section('contenido')
     <h2>Vista Index de CLUB</h2>
-    <a href="clubs/create" class="btn btn-success mb-6">Nou club</a>
+    <a href="clubs/create" class="btn btn-success mb-6">Crear nou club</a>
 
     <table id="clubs" class="table table-success table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-success text-success">

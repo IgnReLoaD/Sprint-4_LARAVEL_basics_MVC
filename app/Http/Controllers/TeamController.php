@@ -13,9 +13,10 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($id_club)
-    {
+    {        
         // DEBUG:
         // echo "TeamController ... id_club = " . $id_club . "<br><br>";
+        // die;
 
         $fieldsetClub = Club::select("*")->where('id','=',$id_club);
 
@@ -35,9 +36,10 @@ class TeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id_club)
     {
-        return view('team.create');
+        // per crear un Team que pertanyi al Club (li passem valor a grabar a Clau Forana)
+        return view('team.create')->with('id_club',$id_club);
     }
 
     /**
@@ -48,7 +50,18 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 'request' conté el $_POST[input1,input2,input3...] 
+        // print($request->get('inpClb'));
+        // print($request->get('inpNom'));
+        // print($request->get('inpTyp'));
+        // die;
+        $objTeam = new Team();
+        $objTeam->club_id = $request->get('inpClb');
+        $objTeam->name = $request->get('inpNom');
+        $objTeam->type = $request->get('inpTyp');  
+        $objTeam->save();
+        $objClub = Club::find($request->get('inpClb'));
+        return view('club.edit')->with('club',$objClub);
     }
 
     /**
@@ -68,9 +81,18 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_club, $id_team)
     {
-        //
+        // echo "TeamController... id_club=".$id_club."<br>";
+        // echo "TeamController... id_team=".$id_team;
+        // die;
+        $objClub = Club::find($id_club);
+
+        $objTeam = Team::find($id_team);
+        // echo "el team es: " . $objTeam->id . ":" . $objTeam->name;
+        // die;
+        // return view('team.edit')->with('team',$objTeam);
+        return view('team.edit', compact('objClub', 'objTeam'));
     }
 
     /**
@@ -80,9 +102,26 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_club, $id_team)
     {
-        //
+        // echo "TeamController - update() - id_club=".$id_club." id_team=".$id_team."<br>";
+        // die;
+        $objTeam = Team::find($id_team);
+        $objTeam->club_id = $request->get('inpClb');
+        $objTeam->name = $request->get('inpNom');
+        $objTeam->type = $request->get('inpTyp');
+        // print($objTeam->id);
+        // die;
+        $objTeam->save();
+        // die;
+        // $recordsetTeams = Team::where('club_id','=',$objTeam->club_id);
+        // var_dump($recordsetTeams);
+        // echo count($recordsetTeams);
+        // die;
+        // Club - veure els seus equips ... /clubs/{{$club->id}}/teams
+        // return view('team.index')->with($recordsetTeams);
+
+        return redirect('/clubs/'.$objTeam->club_id.'/teams');        
     }
 
     /**
@@ -91,8 +130,25 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    // public function destroy($id_club, $id_team)
+    // {
+    //     // $objTeam = Team::find($id_team);
+    //     // print($objTeam->id);
+    //     // var_dump($objTeam);
+    //     // die;
+    //     // echo strval($objTeam->getId());
+    //     // die;
+    //     echo "TeamController::destroy... id_club=".$id_club." id_team=".$id_team." <br> ";
+    //     // echo "TeamController::destroy... id_team=".$id_team." <br> ";
+    //     die;
+
+    //     // mirem quin Club per saber tornar després a llista equips de Club
+    //     $objClub = Club::find($objTeam->club_id);
+    //     $club_id = $club->id;
+
+    //     // metode DELETE espera un objecte perquè ell ja va a eliminar pel seu 'id'
+    //     $objTeam = Team::find($id_team);
+    //     $objTeam->delete($objTeam);
+    //     return redirect('/clubs/'.$club_id.'/teams');        
+    // }
 }
