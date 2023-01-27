@@ -15,14 +15,19 @@ class TeamController extends Controller
     public function index($id_club)
     {
         // DEBUG:
-        echo "TeamController ... id_club= " .$id_club . "<br><br>";
-        // die;
+        // echo "TeamController ... id_club = " . $id_club . "<br><br>";
+
+        $fieldsetClub = Club::select("*")->where('id','=',$id_club);
 
         $recordsetTeams = Team::select("*")->where('club_id','=',$id_club)->get()->sortByDesc('name');        
-        // DEBUG:
         print($recordsetTeams);
-        // VIEW:
-        return view('team.index')->with('recordsetTeams',$recordsetTeams);        
+        
+        if (count($recordsetTeams) == 0) {
+            echo "no hi ha registres";
+            return view('club.edit')->with('club',$fieldsetClub);
+        }else{
+            return view('team.index')->with('recordsetTeams',$recordsetTeams);
+        }
     }
 
     /**
@@ -32,7 +37,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('team.create');
     }
 
     /**

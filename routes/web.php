@@ -19,29 +19,23 @@ Route::get('/', function () {
     return view('clubs.index');
 });
 
-// Route::get('/', [ClubController::class, 'index'])->name('home');
-// Route::resource('NOM_TAULA', NomController::class)->names('nomVista');
-
-Route::resource('clubs','App\Http\Controllers\ClubController'); 
-Route::get('clubs', [ClubController::class, 'index'])->name('club.index');
-Route::put('clubs/{club}/edit', [ClubController::class, 'edit'])->name('club.edit');
-// Route::get('clubs', [ClubController::class, 'show'])->name('show');
-// Route::delete('clubs', [ClubController::class, 'destroy'])->name('clubs.destroy');
-
 // show store create index edit update destroy
 
-// totes les rutes (edit, index, store....) dels metodes del teamController
-// Route::resource('clubs/{club}/teams','App\Http\Controllers\TeamController'); 
+// CLUBS
+Route::resource('clubs','App\Http\Controllers\ClubController'); 
+// Route::get('clubs', [ClubController::class, 'index'])->name('club.list');
+Route::put('clubs/{club}/edit', [ClubController::class, 'edit'])->name('club.details');
+Route::put('clubs/{club}/update', [ClubController::class, 'update'])->name('club.update');
+Route::delete('clubs/{club}/destroy', [TeamController::class, 'destroy'])->name('club.destroy');
 
-Route::get('clubs/{club}/teams', [TeamController::class, 'index'])->name('team.index');
-// Route::get('teams', [TeamController::class, 'index'])->name('team.index');
-Route::delete('teams', [TeamController::class, 'destroy'])->name('teams.destroy');
+// TEAMS
+Route::resource('clubs/{club}/teams','App\Http\Controllers\TeamController'); 
+// Route::resource('clubs/{club}/teams', TeamController::class)->names('teams');
+Route::get('clubs/{club}/teams', [TeamController::class, 'index'])->name('teams.list');
+Route::delete('teams', [TeamController::class, 'destroy'])->name('team.destroy');
 
 
-// Route::resource('players/{team}/index','App\Http\Controllers\PlayerController');
-// Route::resource('matches','App\Http\Controllers\MatchController');
-// Route::resource('actions/{match}/index','App\Http\Controllers\ActionController');
-
+// GESTIO USUARIS
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

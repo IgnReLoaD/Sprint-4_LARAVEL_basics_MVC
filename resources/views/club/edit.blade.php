@@ -6,6 +6,7 @@
 
 <!-- FITXA DE DETALL DEL CLUB  -->
 <form action="/clubs/{{$club->id}}" method="post">
+<!-- <form action="{{ route('club.update', $club) }}" method="post"> -->
     
     <!-- confiar en la pagina, i que no surti error 419-page expired  -->
     @csrf 
