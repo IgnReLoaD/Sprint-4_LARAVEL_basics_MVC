@@ -1,95 +1,63 @@
-+--------+-----------+------------------------------------------+---------------------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------+
-| Domain | Method    | URI                                      | Name                            | Action                                                                            | Middleware                                                |
-+--------+-----------+------------------------------------------+---------------------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------+
-|        | GET|HEAD  | /                                        |                                 | Closure                                                                           | web                                                       |
-|        | GET|HEAD  | api/user                                 |                                 | Closure                                                                           | api                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:sanctum                  |
-|        | GET|HEAD  | clubs                                    | clubs.index                     | App\Http\Controllers\ClubController@index                                         | web                                                       |
-|        | POST      | clubs                                    | clubs.store                     | App\Http\Controllers\ClubController@store                                         | web                                                       |
-|        | GET|HEAD  | clubs/create                             | clubs.create                    | App\Http\Controllers\ClubController@create                                        | web                                                       |
-|        | GET|HEAD  | clubs/{club}                             | clubs.show                      | App\Http\Controllers\ClubController@show                                          | web                                                       |
-|        | PUT|PATCH | clubs/{club}                             | clubs.update                    | App\Http\Controllers\ClubController@update                                        | web                                                       |
-|        | DELETE    | clubs/{club}                             | clubs.destroy                   | App\Http\Controllers\ClubController@destroy                                       | web                                                       |
-|        | DELETE    | clubs/{club}/destroy                     | club.destroy                    | App\Http\Controllers\TeamController@destroy                                       | web                                                       |
-|        | GET|HEAD  | clubs/{club}/edit                        | clubs.edit                      | App\Http\Controllers\ClubController@edit                                          | web                                                       |
-|        | PUT       | clubs/{club}/edit                        | club.details                    | App\Http\Controllers\ClubController@edit                                          | web                                                       |
-|        | GET|HEAD  | clubs/{club}/teams                       | teams.list                      | App\Http\Controllers\TeamController@index                                         | web                                                       |
-|        | POST      | clubs/{club}/teams                       | teams.store                     | App\Http\Controllers\TeamController@store                                         | web                                                       |
-|        | GET|HEAD  | clubs/{club}/teams/create                | teams.create                    | App\Http\Controllers\TeamController@create                                        | web                                                       |
-|        | GET|HEAD  | clubs/{club}/teams/{team}                | teams.show                      | App\Http\Controllers\TeamController@show                                          | web                                                       |
-|        | PUT|PATCH | clubs/{club}/teams/{team}                | teams.update                    | App\Http\Controllers\TeamController@update                                        | web                                                       |
-|        | DELETE    | clubs/{club}/teams/{team}                | teams.destroy                   | App\Http\Controllers\TeamController@destroy                                       | web                                                       |
-|        | DELETE    | clubs/{club}/teams/{team}/destroy        | teams.destroy                   | App\Http\Controllers\TeamController@destroy                                       | web                                                       |
-|        | GET|HEAD  | clubs/{club}/teams/{team}/edit           | teams.edit                      | App\Http\Controllers\TeamController@edit                                          | web                                                       |
-|        | PUT       | clubs/{club}/teams/{team}/edit           | team.details                    | App\Http\Controllers\TeamController@edit                                          | web                                                       |
-|        | PUT       | clubs/{club}/teams/{team}/update         | team.update                     | App\Http\Controllers\ClubController@update                                        | web                                                       |
-|        | PUT       | clubs/{club}/update                      | club.update                     | App\Http\Controllers\ClubController@update                                        | web                                                       |
-|        | GET|HEAD  | dashboard                                | dashboard                       | Closure                                                                           | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:sanctum                  |
-|        |           |                                          |                                 |                                                                                   | Laravel\Jetstream\Http\Middleware\AuthenticateSession     |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\EnsureEmailIsVerified          |
-|        | GET|HEAD  | forgot-password                          | password.request                | Laravel\Fortify\Http\Controllers\PasswordResetLinkController@create               | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | POST      | forgot-password                          | password.email                  | Laravel\Fortify\Http\Controllers\PasswordResetLinkController@store                | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | GET|HEAD  | livewire/livewire.js                     |                                 | Livewire\Controllers\LivewireJavaScriptAssets@source                              |                                                           |
-|        | GET|HEAD  | livewire/livewire.js.map                 |                                 | Livewire\Controllers\LivewireJavaScriptAssets@maps                                |                                                           |
-|        | POST      | livewire/message/{name}                  | livewire.message                | Livewire\Controllers\HttpConnectionHandler                                        | web                                                       |
-|        | GET|HEAD  | livewire/preview-file/{filename}         | livewire.preview-file           | Livewire\Controllers\FilePreviewHandler@handle                                    | web                                                       |
-|        | POST      | livewire/upload-file                     | livewire.upload-file            | Livewire\Controllers\FileUploadHandler@handle                                     | web                                                       |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Routing\Middleware\ThrottleRequests:60,1       |
-|        | GET|HEAD  | login                                    | login                           | Laravel\Fortify\Http\Controllers\AuthenticatedSessionController@create            | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | POST      | login                                    |                                 | Laravel\Fortify\Http\Controllers\AuthenticatedSessionController@store             | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Routing\Middleware\ThrottleRequests:login      |
-|        | POST      | logout                                   | logout                          | Laravel\Fortify\Http\Controllers\AuthenticatedSessionController@destroy           | web                                                       |
-|        | GET|HEAD  | register                                 | register                        | Laravel\Fortify\Http\Controllers\RegisteredUserController@create                  | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | POST      | register                                 |                                 | Laravel\Fortify\Http\Controllers\RegisteredUserController@store                   | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | POST      | reset-password                           | password.update                 | Laravel\Fortify\Http\Controllers\NewPasswordController@store                      | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | GET|HEAD  | reset-password/{token}                   | password.reset                  | Laravel\Fortify\Http\Controllers\NewPasswordController@create                     | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | GET|HEAD  | sanctum/csrf-cookie                      |                                 | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show                        | web                                                       |
-|        | GET|HEAD  | two-factor-challenge                     | two-factor.login                | Laravel\Fortify\Http\Controllers\TwoFactorAuthenticatedSessionController@create   | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        | POST      | two-factor-challenge                     |                                 | Laravel\Fortify\Http\Controllers\TwoFactorAuthenticatedSessionController@store    | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\RedirectIfAuthenticated:web           |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Routing\Middleware\ThrottleRequests:two-factor |
-|        | GET|HEAD  | user/confirm-password                    |                                 | Laravel\Fortify\Http\Controllers\ConfirmablePasswordController@show               | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        | POST      | user/confirm-password                    | password.confirm                | Laravel\Fortify\Http\Controllers\ConfirmablePasswordController@store              | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        | GET|HEAD  | user/confirmed-password-status           | password.confirmation           | Laravel\Fortify\Http\Controllers\ConfirmedPasswordStatusController@show           | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        | POST      | user/confirmed-two-factor-authentication | two-factor.confirm              | Laravel\Fortify\Http\Controllers\ConfirmedTwoFactorAuthenticationController@store | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-|        | PUT       | user/password                            | user-password.update            | Laravel\Fortify\Http\Controllers\PasswordController@update                        | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        | GET|HEAD  | user/profile                             | profile.show                    | Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController@show            | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:sanctum                  |
-|        |           |                                          |                                 |                                                                                   | Laravel\Jetstream\Http\Middleware\AuthenticateSession     |
-|        | PUT       | user/profile-information                 | user-profile-information.update | Laravel\Fortify\Http\Controllers\ProfileInformationController@update              | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        | POST      | user/two-factor-authentication           | two-factor.enable               | Laravel\Fortify\Http\Controllers\TwoFactorAuthenticationController@store          | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-|        | DELETE    | user/two-factor-authentication           | two-factor.disable              | Laravel\Fortify\Http\Controllers\TwoFactorAuthenticationController@destroy        | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-|        | GET|HEAD  | user/two-factor-qr-code                  | two-factor.qr-code              | Laravel\Fortify\Http\Controllers\TwoFactorQrCodeController@show                   | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-|        | GET|HEAD  | user/two-factor-recovery-codes           | two-factor.recovery-codes       | Laravel\Fortify\Http\Controllers\RecoveryCodeController@index                     | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-|        | POST      | user/two-factor-recovery-codes           |                                 | Laravel\Fortify\Http\Controllers\RecoveryCodeController@store                     | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-|        | GET|HEAD  | user/two-factor-secret-key               | two-factor.secret-key           | Laravel\Fortify\Http\Controllers\TwoFactorSecretKeyController@show                | web                                                       |
-|        |           |                                          |                                 |                                                                                   | App\Http\Middleware\Authenticate:web                      |
-|        |           |                                          |                                 |                                                                                   | Illuminate\Auth\Middleware\RequirePassword                |
-+--------+-----------+------------------------------------------+---------------------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------+
+
+   Illuminate\Contracts\Container\BindingResolutionException 
+
+  Target class [PlayerController] does not exist.
+
+  at C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\laravel\framework\src\Illuminate\Container\Container.php:879
+    875▕ 
+    876▕         try {
+    877▕             $reflector = new ReflectionClass($concrete);
+    878▕         } catch (ReflectionException $e) {
+  ➜ 879▕             throw new BindingResolutionException("Target class [$concrete] does not exist.", 0, $e);
+    880▕         }
+    881▕ 
+    882▕         // If the type is not instantiable, the developer is attempting to resolve
+    883▕         // an abstract type such as an Interface or Abstract Class and there is
+
+   Whoops\Exception\ErrorException 
+
+  Using ${var} in strings is deprecated, use {$var} instead
+
+  at C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\facade\ignition\src\SolutionProviders\MergeConflictSolutionProvider.php:52
+     48▕     }
+     49▕ 
+     50▕     protected function getCurrentBranch(string $directory): string
+     51▕     {
+  ➜  52▕         $branch = "'".trim(shell_exec("cd ${directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
+     53▕ 
+     54▕         if ($branch === "''") {
+     55▕             $branch = 'current branch';
+     56▕         }
+
+   Symfony\Component\ErrorHandler\Error\FatalError 
+
+  Uncaught Whoops\Exception\ErrorException: Using ${var} in strings is deprecated, use {$var} instead in C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\facade\ignition\src\SolutionProviders\MergeConflictSolutionProvider.php:52
+Stack trace:
+#0 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\composer\ClassLoader.php(571): Whoops\Run->handleError(8192, 'Using ${var} in...', 'C:\\xampp\\htdocs...', 52)
+#1 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\composer\ClassLoader.php(571): include()
+#2 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\composer\ClassLoader.php(428): Composer\Autoload\includeFile('C:\\xampp\\htdocs...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Facade\\Ignition...')
+#4 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\facade\ignition\src\SolutionProviders\SolutionProviderRepository.php(50): class_implements('Facade\\Ignition...')
+#5 [internal function]: Facade\Ignition\SolutionProviders\SolutionProviderRepository->Facade\Ignition\SolutionProviders\{closure}('Facade\\Ignition...', 10)
+#6 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\laravel\framework\src\Illuminate\Collections\Arr.php(717): array_filter(Array, Object(Closure), 1)
+#7 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\laravel\framework\src\Illuminate\Collections\Collection.php(358): Illuminate\Support\Arr::where(Array, Object(Closure))
+#8 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\facade\ignition\src\SolutionProviders\SolutionProviderRepository.php(49): Illuminate\Support\Collection->filter(Object(Closure))
+#9 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\nunomaduro\collision\src\Adapters\Laravel\IgnitionSolutionsRepository.php(36): Facade\Ignition\SolutionProviders\SolutionProviderRepository->getSolutionsForThrowable(Object(Whoops\Exception\ErrorException))
+#10 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\nunomaduro\collision\src\Writer.php(244): NunoMaduro\Collision\Adapters\Laravel\IgnitionSolutionsRepository->getFromThrowable(Object(Whoops\Exception\ErrorException))
+#11 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\nunomaduro\collision\src\Writer.php(123): NunoMaduro\Collision\Writer->renderSolution(Object(Whoops\Exception\Inspector))
+#12 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\nunomaduro\collision\src\Handler.php(39): NunoMaduro\Collision\Writer->write(Object(Whoops\Exception\Inspector))
+#13 C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\filp\whoops\src\Whoops\Run.php(370): NunoMaduro\Collision\Handler->handle(Object(Whoops\Exception\ErrorException))
+#14 [internal function]: Whoops\Run->handleException(Object(Whoops\Exception\ErrorException))
+#15 {main}
+  thrown
+
+  at C:\xampp\htdocs\ITAcademy_PhP\Sprint-4_LARAVEL_basics_MVC\vendor\facade\ignition\src\SolutionProviders\MergeConflictSolutionProvider.php:52
+     48▕     }
+     49▕ 
+     50▕     protected function getCurrentBranch(string $directory): string
+     51▕     {
+  ➜  52▕         $branch = "'".trim(shell_exec("cd ${directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
+     53▕ 
+     54▕         if ($branch === "''") {
+     55▕             $branch = 'current branch';
+     56▕         }

@@ -19,9 +19,8 @@ class TeamController extends Controller
         // die;
 
         $fieldsetClub = Club::select("*")->where('id','=',$id_club);
-
         $recordsetTeams = Team::select("*")->where('club_id','=',$id_club)->get()->sortByDesc('name');        
-        print($recordsetTeams);
+        // print($recordsetTeams);
         
         if (count($recordsetTeams) == 0) {
             echo "no hi ha registres";

@@ -14,6 +14,9 @@
   <body>
     <h1 class="bg-success text-white text-center">Master's League!</h1>
 
+    <div>
+      @yield('inpHiddenClub')
+    </div>
     <div class="container">
         <!-- 'yield' = 'producción' en Anglès  -->
         <!-- es com fer <div id="contenido">  -->

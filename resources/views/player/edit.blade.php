@@ -1,9 +1,5 @@
 @extends('layouts.plantillabase');
 
-@section('inpHiddenClub')
-    <input id="inpHiddenClub" type="hidden" value="{{$objTeam->club_id}}">
-@endsection
-
 @section('contenido')
 
 <h2>Vista Editar un Team de un Club</h2>
@@ -43,11 +39,13 @@
 </form>
 <br>
 <hr>
-    <!-- LLISTA DE PLAYERS D'AQUEST TEAM  -->
+    <!-- LLISTA DE TEAMS_CATEGORIES D'AQUEST CLUB  -->
     <div class="container mt-6">        
         <a href="/clubs/{{$objTeam->club_id}}/teams/{{$objTeam->id}}/players" class="btn btn-success">Veure els seus jugadors...</a>         
+
         <!-- @csrf   -->
         <!-- @yield('teamsList') -->
-    </div>    
+    </div>
+    
 
 @endsection

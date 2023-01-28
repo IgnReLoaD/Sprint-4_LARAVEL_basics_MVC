@@ -13,8 +13,9 @@
 @section('contenido')
 
     <h2>Vista Index de Teams del Club {{$recordsetTeams[0]->club_id}}:</h2>
+    <p></p>
     <a href="teams/create" class="btn btn-success mb-6">Crear nou equip per aquest club</a>
-
+    <p></p>
     <table id="tblTeams" class="table table-success table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-success text-success">
             <tr>

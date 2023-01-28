@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Models\Club;
-use App\Models\Team;
-use App\Models\Player;
 
 class PlayerController extends Controller
 {
@@ -17,6 +15,16 @@ class PlayerController extends Controller
     {
         echo "PlayerController - index - id_club=".$id_club." id_team=".$id_team."<br>";
         die;
+        // ... clubs/2/teams/3/players
+        // ... clubs/{club}/teams{team}/players
+        $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+        $recordsetPlayers = Player::select("*")->where('team_id','=',$id_team)->get()->sortByDesc('name');
+        if (count($recordsetPlayers) == 0) {
+            echo "no hi ha registres";
+            return view('team.edit')->with('team',$fieldsetTeam);
+        }else{
+            return view('player.index', compact('recordsetPlayers','id_club'));
+        }
     }
 
     /**
