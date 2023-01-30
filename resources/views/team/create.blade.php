@@ -25,7 +25,7 @@
         <label for="inpTyp" class="form-label">Tipus esport</label>
         <input type="text" id="inpTyp" name="inpTyp" class="form-control" tabindex="2">
     </div>    
-    <a href="/clubs/{club}/teams" class="btn btn-secondary" tabindex="3">Cancelar</a>
+    <a href="/clubs/{{$id_club}}/teams" class="btn btn-secondary" tabindex="3">Cancelar</a>
     <button type="submit" class="btn btn-primary" tabindex="4">Grabar</button>
 </form>
 @endsection

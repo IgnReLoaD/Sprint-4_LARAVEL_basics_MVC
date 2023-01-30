@@ -43,8 +43,8 @@
         </tbody>
     </table>
     <hr>
-    <a href="/clubs/{{$fieldsetTeam->club_id}}/edit" class="btn btn-success"><< Tornar a la Fitxa del Club</a>
-    <a href="/clubs" class="btn btn-secondary"><< Tornar a la llista de Clubs</a>
+    <a href="/clubs" class="btn btn-secondary"><< Tornar a la llista de Clubs</a> &nbsp;
+    <a href="/clubs/{{$fieldsetTeam->club_id}}/edit" class="btn btn-success"><< Tornar a la Fitxa del Club</a>    
 
     @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

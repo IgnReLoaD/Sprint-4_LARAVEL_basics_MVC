@@ -15,8 +15,28 @@ class PlayerController extends Controller
      */
     public function index($id_club, $id_team)
     {
-        echo "PlayerController - index - id_club=".$id_club." id_team=".$id_team."<br>";
-        die;
+        //echo "PlayerController - index - id_club=".$id_club." id_team=".$id_team."<br>";
+        // die;
+        $fieldsetClub = Club::select("*")->where('id','=',$id_club);        
+        $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+        // per quan tornem enrere a Fitxa Team necessitem nomenclatura objClub i objTeam
+        // $objClub = $fieldsetClub;
+        // $objTeam = $fieldsetTeam;
+
+        $recordsetPlayers = Player::select("*")->where('team_id','=',$id_team)->get()->sortByDesc('name');
+        if (count($recordsetPlayers) == 0) {
+            echo "ATENCIO: no hi ha registres!! Tornant a la fitxa del Equip...";
+            // sleep(0.5);           
+            // $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+            return view('team.edit')
+                // ->with('objClub',$fieldsetClub);
+                ->with('objTeam',$fieldsetTeam);
+        }else{
+            return view('player.index')                
+                ->with('recordsetPlayers',$recordsetPlayers)
+                ->with('id_club',$id_club);
+                // , compact('recordsetPlayers','objTeam','id_club'));
+        }
     }
 
     /**
@@ -24,9 +44,25 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id_club, $id_team)
     {
-        //
+        echo "PlayerController ... create!!  .. id_team=" . $id_team;
+        // die;
+        // per crear un Player que pertanyi al Team (li passem valor a grabar a Clau Forana)
+        // $club_id = Team::select("club_id")->where('id','=',$id_team);
+        $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+        if (is_null($fieldsetTeam)){
+            echo "no hi ha camps";
+            die;
+        }
+        // $club_id = $fieldsetTeam->club_id;
+        // print($fieldsetTeam->club_id);
+        // die;
+
+        return view('player.create')
+            ->with('team',$fieldsetTeam);
+
+            // ->with('club',$fieldsetClub);
     }
 
     /**
@@ -37,7 +73,13 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $objPlayer = new Player();
+        // $objPlayer->team_id = $request->get('inpTea');
+        // $objPlayer->name = $request->get('inpNom');
+        // $objPlayer->number = $request->get('inpDor');  
+        // $objPlayer->save();
+        // $objTeam = Team::find($request->get('inpTea'));
+        // return view('team.edit')->with('team',$objTeam);       
     }
 
     /**

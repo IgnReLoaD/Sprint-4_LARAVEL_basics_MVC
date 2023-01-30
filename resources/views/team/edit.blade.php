@@ -1,7 +1,7 @@
 @extends('layouts.plantillabase');
 
 @section('inpHiddenClub')
-    <input id="inpHiddenClub" type="hidden" value="{{$objTeam->club_id}}">
+    {{-- <input id="inpHiddenClub" type="hidden" value="{{$objTeam->club_id}}"> --}}
 @endsection
 
 @section('contenido')
@@ -9,7 +9,6 @@
 <h2>Vista Editar un Team de un Club</h2>
 
 <!-- FITXA DE DETALL DEL CLUB  -->
-<!-- <form action="/clubs/{{$objClub->id}}/teams/{{$objTeam->id}}" method="post"> -->
 <form action="/clubs/{{$objTeam->club_id}}/teams/{{$objTeam->id}}" method="post">    
     
     <!-- confiar en la pagina, i que no surti error 419-page expired  -->

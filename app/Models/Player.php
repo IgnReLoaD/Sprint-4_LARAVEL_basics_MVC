@@ -9,7 +9,8 @@ class Player extends Model
 {
     use HasFactory;
     // ATRIBUTS:
-    protected $fillable = ['teamCategory_id','name','number','birthdate','height','weight','position','goals','points','faults','assists','expulsions','available'];
+    protected $fillable = ['id','team_id','name','number','birthdate','height','weight','position','goals','points','faults','assists','expulsions','available'];
+    public $timestamps = false;
 
     // PLAYERS 1--N ACTIONS (Right Join) ... hasMany()
     public function actions(){
@@ -22,8 +23,8 @@ class Player extends Model
     }    
 
     // PLAYERS N--1 TEAM_CATEGORY (Left Join) ... belongsTo()
-    public function team_category(){
-        return $this->belongsTo(Team_category::class, 'id_team');
+    public function teams(){
+        return $this->belongsTo(Team::class, 'id_team');
     }
 
 }

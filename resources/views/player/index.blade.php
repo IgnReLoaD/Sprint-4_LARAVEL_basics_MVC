@@ -8,7 +8,7 @@
 
     <h2>Vista Index de Players del Team {{$recordsetPlayers[0]->team_id}}:</h2>
     <p></p>
-    <a href="players/create" class="btn btn-success mb-6">Crear nou jugador per aquest equip-categoria</a>
+    <a href="players/create" class="btn btn-success mb-6">Crear jugador per aquest club/equip</a>
     <p></p>
     <table id="tblTeams" class="table table-success table-striped table-bordered shadow-lg mt-4" style="width:100%">
         <thead class="bg-success text-success">
@@ -33,17 +33,20 @@
                 <td>{{ $fieldsetPlayer->birthdate }}</td>
                 <td>{{ $fieldsetPlayer->position }}</td>
                 <td>{{ $fieldsetPlayer->injuries }}</td>                
-                <td>    
-                    <!-- <a href="/clubs/{{document.getElementById('inpHiddenClub').value}}/teams/{{$fieldsetPlayer->team_id}}/player/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a> -->
+                <td>  
+                {{-- y --}}   
+                    {{--  <a href="/clubs/{{document.getElementById('inpHiddenClub').value}}/teams/{{$fieldsetPlayer->team_id}}/player/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a> --> --}}
                     <!-- <a href="/players/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a>                     -->
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    <hr>
-    <!-- <a href="/teams/{{$fieldsetPlayer->team_id}}/edit" class="btn btn-success"><< Tornar a Fitxa Equip</a> -->
-    <a href="/teams" class="btn btn-secondary"><< Tornar a Llista Equips</a>
+    <hr>    
+    {{-- <a href="/clubs/{{$objClub->id}}/teams/$recordsetPlayers[0]->team_id}}/edit" class="btn btn-secondary"><< Tornar a Llista Equips</a> --}}
+    <a href="/clubs" class="btn btn-secondary"><< Tornar a Llista de Clubs</a> &nbsp;
+    <a href="/clubs/{{$id_club}}/teams" class="btn btn-secondary"><< Tornar a Llista Equips</a> &nbsp;
+    <a href="/clubs/{{$id_club}}/teams/{{$recordsetPlayers[0]->team_id}}/edit" class="btn btn-success"><< Tornar a Fitxa Equip</a> &nbsp;
 
     @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

@@ -84,13 +84,8 @@ class TeamController extends Controller
     {
         // echo "TeamController... id_club=".$id_club."<br>";
         // echo "TeamController... id_team=".$id_team;
-        // die;
         $objClub = Club::find($id_club);
-
         $objTeam = Team::find($id_team);
-        // echo "el team es: " . $objTeam->id . ":" . $objTeam->name;
-        // die;
-        // return view('team.edit')->with('team',$objTeam);
         return view('team.edit', compact('objClub', 'objTeam'));
     }
 

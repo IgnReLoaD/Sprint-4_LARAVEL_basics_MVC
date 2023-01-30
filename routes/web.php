@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,16 +30,20 @@ Route::put('clubs/{club}/update', [ClubController::class, 'update'])->name('club
 Route::delete('clubs/{club}/destroy', [TeamController::class, 'destroy'])->name('club.destroy');
 
 // TEAMS
-// Route::resource('team',TeamController::class)->names('team');
 Route::resource('clubs/{club}/teams','App\Http\Controllers\TeamController'); 
 Route::get('clubs/{club}/teams', [TeamController::class, 'index'])->name('teams.list');
 Route::put('clubs/{club}/teams/{team}/edit', [TeamController::class, 'edit'])->name('team.details');
 Route::put('clubs/{club}/teams/{team}/update', [ClubController::class, 'update'])->name('team.update');
 Route::delete('clubs/{club}/teams/{team}/destroy', [TeamController::class, 'destroy'])->name('teams.destroy');
 
-// PLAYERS
-Route::resource('clubs/{club}/teams/{team}/players','App\Http\Controllers\PlayerController'); 
-Route::get('clubs/{club}/teams/{team}/players', [PlayerController::class, 'index'])->name('players.list');
+// PLAYERS (aprenem a treballar amb GRUPOS de Rutas)
+Route::controller(PlayerController::class)->group(function(){
+    Route::get('clubs/{club}/teams/{team}/players', 'index');
+    Route::get('clubs/{club}/teams/{team}/players/create', 'create');
+});
+
+// Route::resource('clubs/{club}/teams/{team}/players','App\Http\Controllers\PlayerController'); 
+// Route::get('clubs/{club}/teams/{team}/players', [PlayerController::class, 'index'])->name('player.index');
 // Route::resource('player', PlayerController::class)->names('player');
 // Route::get('clubs/{club}/teams/{team}/players', [PlayerController::class, 'index'])->name('player.index');
 
