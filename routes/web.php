@@ -40,6 +40,7 @@ Route::delete('clubs/{club}/teams/{team}/destroy', [TeamController::class, 'dest
 Route::controller(PlayerController::class)->group(function(){
     Route::get('clubs/{club}/teams/{team}/players', 'index');
     Route::get('clubs/{club}/teams/{team}/players/create', 'create');
+    Route::post('clubs/{club}/teams/{team}/players', 'store');
 });
 
 // Route::resource('clubs/{club}/teams/{team}/players','App\Http\Controllers\PlayerController'); 
