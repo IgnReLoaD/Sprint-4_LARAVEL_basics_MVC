@@ -35,17 +35,12 @@
                 <td>{{ $fieldsetPlayer->injuries }}</td>                
                 <td>  
                 {{-- y --}}   
-                {{-- <form action="{{ route ('teams.destroy', $fieldsetTeam->club_id, $fieldsetTeam->id) }}" method="post"> --}
-                    
-                    <form action="{{ route ('players.destroy',$fieldsetPlayer->id) }}" method="post">
+                    <form action="players/{{$fieldsetPlayer->id}}/destroy" method="post">
                         <a href="players/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a>             
                         @csrf 
                         @method('DELETE')
                         <button class="btn btn-danger">borrar</button>
-                    </form>
-
-                    
-                    {{-- "/clubs/{{$fieldsetTeam->club_id}}/teams/{{$fieldsetTeam->id}}/players/{player}/edit"  --}}
+                    </form>                    
                 </td>
             </tr>
             @endforeach

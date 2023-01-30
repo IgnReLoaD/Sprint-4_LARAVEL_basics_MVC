@@ -16,26 +16,21 @@ class PlayerController extends Controller
     public function index($id_club, $id_team)
     {
         //echo "PlayerController - index - id_club=".$id_club." id_team=".$id_team."<br>";
-        // die;
-        $fieldsetClub = Club::select("*")->where('id','=',$id_club);        
-        $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+        
         // per quan tornem enrere a Fitxa Team necessitem nomenclatura objClub i objTeam
-        // $objClub = $fieldsetClub;
-        // $objTeam = $fieldsetTeam;
 
         $recordsetPlayers = Player::select("*")->where('team_id','=',$id_team)->get()->sortByDesc('name');
         if (count($recordsetPlayers) == 0) {
             echo "ATENCIO: no hi ha registres!! Tornant a la fitxa del Equip...";
             // sleep(0.5);           
-            // $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+            $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
             return view('team.edit')
-                // ->with('objClub',$fieldsetClub);
                 ->with('objTeam',$fieldsetTeam);
         }else{
             return view('player.index')                
                 ->with('recordsetPlayers',$recordsetPlayers)
                 ->with('id_club',$id_club);
-                // , compact('recordsetPlayers','objTeam','id_club'));
+                // , compact('recordsetPlayers', 'id_club'));
         }
     }
 
@@ -49,12 +44,6 @@ class PlayerController extends Controller
         // echo "PlayerController ... create!!  .. id_club=".$id_club." id_team=" . $id_team;
         // die;
         // per crear un Player que pertanyi al Team (li passem valor a grabar a Clau Forana)
-        // $club_id = Team::select("club_id")->where('id','=',$id_team);
-        // $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
-        // if (is_null($fieldsetTeam)){
-        //     echo "no hi ha camps";
-        //     die;
-        // }
         return view('player.create')
                 ->with('id_club',$id_club)
                 ->with('id_team',$id_team);
@@ -113,9 +102,26 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_club, $id_team, $id_player)
     {
-        //
+        echo "PlayerController - update - id_club=".$id_club." id_team=".$id_team." id_player=".$id_player."<br>";
+        // die;
+
+        $objPlayer = Player::find($id_player);
+        $objPlayer->team_id = $request->get('inpTea');
+        $objPlayer->name = $request->get('inpNom');
+        $objPlayer->number = $request->get('inpDor');   
+        $objPlayer->birthdate = $request->get('inpBir');
+        $objPlayer->save();
+
+        // preparar la view 
+
+        // $objTeam = Team::find($request->get('inpTea'));
+        $recordsetPlayers = Player::select("*")->where('team_id','=',$objPlayer->team_id)->get()->sortByDesc('name');
+        return view('player.index')
+                ->with('recordsetPlayers',$recordsetPlayers)
+                ->with('id_club',$id_club); 
+                // ->with('id_club',$objTeam->club_id); 
     }
 
     /**
@@ -124,8 +130,14 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_club, $id_team, $id_player)
     {
-        //
+        echo "PlayerController - destroy - id_club=".$id_club." id_team=".$id_team." id_player=".$id_player."<br>";
+        // die;
+
+        // metode DELETE espera un objecte perquè ell ja va a eliminar pel seu 'id'
+        $objPlayer = Player::find($id_player);
+        $objPlayer->delete();
+        return redirect('/clubs/'.$id_club.'/teams/'.$id_team.'/players'); 
     }
 }

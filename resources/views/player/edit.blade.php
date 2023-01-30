@@ -5,12 +5,10 @@
 <h2>Vista Editar un Player de un Team</h2>
 
 <!-- FITXA DE DETALL DEL PLAYER  -->
-{{-- <form action="/clubs/{{$objClub->id}}/teams/{{$objTeam->id}}" method="post"> --}}
 <form action="/clubs/{{$objTeam->club_id}}/teams/{{$objPlayer->team_id}}/players/{{$objPlayer->id}}" method="post">    
     
     <!-- confiar en la pagina, i que no surti error 419-page expired  -->
     @csrf 
-
     <!-- etiqueta Form només té method Post/Get, aquesta directiva de Blade permet dir PUT -->
     @method('PUT')
     

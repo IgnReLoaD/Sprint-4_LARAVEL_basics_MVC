@@ -129,7 +129,7 @@ class TeamController extends Controller
 
         // metode DELETE espera un objecte perquè ell ja va a eliminar pel seu 'id'
         $objTeam = Team::find($id_team);
-        $objTeam->delete($objTeam);
+        $objTeam->delete();
         return redirect('/clubs/'.$id_club.'/teams');        
     }
 }

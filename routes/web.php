@@ -43,7 +43,8 @@ Route::controller(PlayerController::class)->group(function(){
     Route::post('clubs/{club}/teams/{team}/players',  'store');
     Route::get( 'clubs/{club}/teams/{team}/players/{player}/edit',  'edit');
     Route::put( 'players/{player}/edit',  'edit');
-    Route::put( 'clubs/{club}/teams/{team}/players/{player}/update',  'update');
+    Route::put( 'clubs/{club}/teams/{team}/players/{player}',  'update');
+    Route::delete( 'clubs/{club}/teams/{team}/players/{player}/destroy',  'destroy');
 });
 
 // Route::resource('clubs/{club}/teams/{team}/players','App\Http\Controllers\PlayerController'); 
