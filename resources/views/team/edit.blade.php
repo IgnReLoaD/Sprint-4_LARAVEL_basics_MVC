@@ -8,7 +8,7 @@
 
 <h2>Vista Editar un Team de un Club</h2>
 
-<!-- FITXA DE DETALL DEL CLUB  -->
+<!-- FITXA DE DETALL DEL TEAM  -->
 <form action="/clubs/{{$objTeam->club_id}}/teams/{{$objTeam->id}}" method="post">    
     
     <!-- confiar en la pagina, i que no surti error 419-page expired  -->

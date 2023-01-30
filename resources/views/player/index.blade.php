@@ -35,8 +35,17 @@
                 <td>{{ $fieldsetPlayer->injuries }}</td>                
                 <td>  
                 {{-- y --}}   
-                    {{--  <a href="/clubs/{{document.getElementById('inpHiddenClub').value}}/teams/{{$fieldsetPlayer->team_id}}/player/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a> --> --}}
-                    <!-- <a href="/players/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a>                     -->
+                {{-- <form action="{{ route ('teams.destroy', $fieldsetTeam->club_id, $fieldsetTeam->id) }}" method="post"> --}
+                    
+                    <form action="{{ route ('players.destroy',$fieldsetPlayer->id) }}" method="post">
+                        <a href="players/{{$fieldsetPlayer->id}}/edit" class="btn btn-success">editar</a>             
+                        @csrf 
+                        @method('DELETE')
+                        <button class="btn btn-danger">borrar</button>
+                    </form>
+
+                    
+                    {{-- "/clubs/{{$fieldsetTeam->club_id}}/teams/{{$fieldsetTeam->id}}/players/{player}/edit"  --}}
                 </td>
             </tr>
             @endforeach

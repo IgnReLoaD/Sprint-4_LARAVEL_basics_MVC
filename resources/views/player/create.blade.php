@@ -34,7 +34,7 @@
     </div>    
 
     {{-- <a href="/clubs/{{$team->club_id}}/teams/{{$team->id}}/players" class="btn btn-secondary" tabindex="3">Cancelar</a> --}}
-    <a href="/clubs/{club}/teams/{team}/players" class="btn btn-secondary" tabindex="4">Cancelar</a>
+    <a href="/clubs/{{$id_club}}/teams/{{$id_team}}/players" class="btn btn-secondary" tabindex="4">Cancelar</a>
 
     <button type="submit" class="btn btn-primary" tabindex="5">Grabar</button>
 </form>

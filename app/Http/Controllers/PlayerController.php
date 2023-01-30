@@ -46,27 +46,18 @@ class PlayerController extends Controller
      */
     public function create($id_club, $id_team)
     {
-        echo "PlayerController ... create!!  .. id_club=".$id_club." id_team=" . $id_team;
+        // echo "PlayerController ... create!!  .. id_club=".$id_club." id_team=" . $id_team;
         // die;
         // per crear un Player que pertanyi al Team (li passem valor a grabar a Clau Forana)
         // $club_id = Team::select("club_id")->where('id','=',$id_team);
-
-        $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
+        // $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
         // if (is_null($fieldsetTeam)){
         //     echo "no hi ha camps";
         //     die;
         // }
-
-        // $club_id = $fieldsetTeam->club_id;
-        // print($fieldsetTeam->club_id);
-        // die;
-
         return view('player.create')
+                ->with('id_club',$id_club)
                 ->with('id_team',$id_team);
-
-            // ->with('team',$fieldsetTeam);
-
-            // ->with('club',$fieldsetClub);
     }
 
     /**
@@ -83,8 +74,12 @@ class PlayerController extends Controller
         $objPlayer->number = $request->get('inpDor');   
         $objPlayer->birthdate = $request->get('inpBir');
         $objPlayer->save();
+        // preparar la view 
         $objTeam = Team::find($request->get('inpTea'));
-        return view('team.edit')->with('objTeam',$objTeam);       
+        $recordsetPlayers = Player::select("*")->where('team_id','=',$objPlayer->team_id)->get()->sortByDesc('name');
+        return view('player.index')
+                ->with('recordsetPlayers',$recordsetPlayers)
+                ->with('id_club',$objTeam->club_id); 
     }
 
     /**
@@ -104,9 +99,11 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id_club, $id_team, $id_player)
+    {        
+        $objTeam = Team::find($id_team);
+        $objPlayer = Player::find($id_player);
+        return view('player.edit', compact('objTeam','objPlayer'));
     }
 
     /**
