@@ -9,7 +9,7 @@ class Action extends Model
 {
     use HasFactory;
     // ATRIBUTS:
-    protected $fillable = ['minute','match_id','event_id', 'player_id','referee_observations'];
+    protected $fillable = ['id','minute','match_id','event_id', 'player_id','referee_observations'];
 
     // ACTIONS N--1 MATCHES (Left Join) ... belongsTo()
     public function matches(){

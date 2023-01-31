@@ -5,6 +5,7 @@ use App\Http\Controllers\ClubController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\ActionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +70,11 @@ Route::controller(GameController::class)->group(function(){
     Route::delete('games/{game}/destroy',  'destroy');
 });
 
-
+// ACTIONS (minut a minut)
+Route::controller(ActionController::class)->group(function(){
+    Route::get( 'games/{game}/actions',  'index');
+    Route::get( 'games/{game}/actions/create',  'create');
+});
 
 // GESTIO USUARIS
 Route::middleware([
