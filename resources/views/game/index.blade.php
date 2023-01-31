@@ -15,12 +15,12 @@
         <thead class="bg-success text-success">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Horari</th>
-                <th scope="col">Jornada</th>
-                <th scope="col">Local</th>
-                <th scope="col" colspan="2">>Marcador</th>
+                <th scope="col" style="text-align:center">Horari</th>
+                <th scope="col" style="text-align:center">Jornada</th>
+                <th scope="col" style="text-align:center">Local</th>
+                <th scope="col" colspan="2" style="text-align:center"> Marcador </th>
                 <!-- <th scope="col">Marcador visitant</th> -->
-                <th scope="col">Visitant</th>
+                <th scope="col" style="text-align:center">Visitant</th>
                 <th scope="col">Opcions</th>
             </tr>
         </thead>
@@ -28,18 +28,18 @@
             @foreach ($recordsetGames as $fieldsetGame)
             <tr>
                 <td>{{ $fieldsetGame->id }}</td>
-                <td>{{ $fieldsetGame->datetime }}</td>
-                <td>{{ $fieldsetGame->journey }}</td>
-                <td>{{ $fieldsetGame->home_team_id }}</td>
-                <td>{{ $fieldsetGame->score_home }}</td>
-                <td>{{ $fieldsetGame->score_away }}</td>
-                <td>{{ $fieldsetGame->visitor_team_id }}</td>
+                <td style="text-align:center">{{ $fieldsetGame->datetime }}</td>
+                <td style="text-align:center">{{ $fieldsetGame->journey }}</td>
+                <td style="text-align:center">{{ $fieldsetGame->home_team_id }}</td>
+                <td style="text-align:right">{{ $fieldsetGame->score_home }}</td>
+                <td style="text-align:left">{{ $fieldsetGame->score_away }}</td>
+                <td style="text-align:center">{{ $fieldsetGame->visitor_team_id }}</td>
                 <td>
-                    <form action="games/{{$fieldsetGame->id}}/destroy" method="post">
-                        <a href="/games/{{$fieldsetGame->id}}/edit" class="btn btn-success">editar</a>
+                    <form action="games/{{$fieldsetGame->id}}/destroy"  method="post">
+                        <a href="/games/{{$fieldsetGame->id}}/edit"  class="btn btn-success">editar</a>
                         @csrf 
                         @method('DELETE')
-                        <button class="btn btn-danger">borrar</button>
+                        <button class="btn btn-danger"> borrar </button>
                     </form>
                 </td>                
             </tr>
