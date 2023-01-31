@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Club;
-use App\Models\Team;
-use App\Models\Player;
-use App\Models\Matchh;
+use App\Models\Game;
 
-class MatchhController extends Controller
+class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +13,10 @@ class MatchhController extends Controller
      */
     public function index()
     {
-        // DEBUG:
-        echo "MatchController ... index";
-        die;
-        $recordsetMatches = Matchh::all();          
-        return view('match.index')->with('recordsetMatches',$recordsetMatches);
+        // echo "GameController ... index";
+        // die;
+        $recordsetGames = Game::all();          
+        return view('game.index')->with('recordsetGames',$recordsetGames);
     }
 
     /**

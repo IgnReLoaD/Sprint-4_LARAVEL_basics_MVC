@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +51,24 @@ Route::controller(PlayerController::class)->group(function(){
 });
 
 // MATCHES
-Route::controller(MatchhController::class)->group(function(){
-    Route::get( 'matches',  'index');
-    Route::get( 'matches/create',  'create');
-    Route::post('matches/',  'store');
-    Route::get( 'matches/{match}/edit', 'edit');
-    Route::put( 'matches/{match}', 'update');
-    Route::delete('matches/{match}/destroy',  'destroy');
+// Route::controller(MatchhController::class)->group(function(){
+//     Route::get( 'matches',  'index');
+//     Route::get( 'matches/create',  'create');
+//     Route::post('matches/',  'store');
+//     Route::get( 'matches/{match}/edit', 'edit');
+//     Route::put( 'matches/{match}', 'update');
+//     Route::delete('matches/{match}/destroy',  'destroy');
+// });
+
+Route::controller(GameController::class)->group(function(){
+    Route::get( 'games',  'index');
+    Route::get( 'games/create',  'create');
+    Route::post('games/',  'store');
+    Route::get( 'games/{game}/edit', 'edit');
+    Route::put( 'games/{game}', 'update');
+    Route::delete('games/{game}/destroy',  'destroy');
 });
+
 
 
 // GESTIO USUARIS
