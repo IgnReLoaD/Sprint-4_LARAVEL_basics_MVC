@@ -15,8 +15,8 @@ class GameController extends Controller
     {
         // echo "GameController ... index";
         // die;
-        $recordsetGames = Game::all();          
-        return view('game.index')->with('recordsetGames',$recordsetGames);
+        $recordsetGames = Game::all() ;          
+        return view('game.index')->with('recordsetGames', $recordsetGames);
     }
 
     /**
@@ -26,7 +26,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('game.create');
+        return view('game.create') ;
     }
 
     /**
@@ -37,19 +37,17 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        // protected $fillable = ['id','datetime','journey','home_team_id', 'visitor_team_id','score_home','score_away'];        
-        // 'request' conté el $_POST[input1,input2,input3...] 
-        $objGame = new Game();
-        $objGame->datetime = $request->get('inpDat');
-        $objGame->journey = $request->get('inpJor');
+        $objGame = new Game() ;
+        $objGame->datetime     = $request->get('inpDat');
+        $objGame->journey      = $request->get('inpJor');
         $objGame->home_team_id = $request->get('inpHomeTeam');
-        $objGame->score_home = $request->get('inpHomeScore');
+        $objGame->score_home   = $request->get('inpHomeScore');
         $objGame->visitor_team_id = $request->get('inpAwayTeam');
-        $objGame->score_away = $request->get('inpAwayScore');
-        // to do in next version...Referee
-        // $objGame->foundation_year_month = $request->get('inpReferee');                                
-        $objGame->save();
-        return redirect('/games');
+        $objGame->score_away   = $request->get('inpAwayScore');
+        // to do in next version... Referee
+        // $objGame->referee_id = $request->get('inpReferee');                                
+        $objGame->save() ;
+        return redirect('/games' );
     }
 
     /**
@@ -60,7 +58,7 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        //
+        // NO LA UTILITZEM
     }
 
     /**
@@ -69,9 +67,10 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_game)
     {
-        //
+        $objGame = Game::find($id_game) ;        
+        return view('game.edit')->with('game',$objGame);
     }
 
     /**
@@ -81,9 +80,19 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $objGame = Game::find($id);        
+        $objGame->datetime     = $request->get('inpDat');
+        $objGame->journey      = $request->get('inpJor');
+        $objGame->home_team_id = $request->get('inpHomeTeam');
+        $objGame->score_home   = $request->get('inpHomeScore');
+        $objGame->visitor_team_id = $request->get('inpAwayTeam');
+        $objGame->score_away   = $request->get('inpAwayScore');
+        // to do in next version... Referee
+        // $objGame->referee_id = $request->get('inpReferee');                                
+        $objGame->save() ;
+        return redirect('/games' );
     }
 
     /**
@@ -92,10 +101,10 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_game)
     {
-        $objGame = Game::find($id);
-        $objGame->delete();
-        return redirect('/games');
+        $objGame = Game::find($id_game);
+        $objGame->delete() ;
+        return redirect('/games' );
     }
 }

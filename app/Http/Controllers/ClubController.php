@@ -79,10 +79,6 @@ class ClubController extends Controller
         $objClub = Club::find($id_club);        
         // echo "el club es: " . $objClub->id . " - " . $objClub->name;
         // die;
-
-        // $str_id_club = strval($id_club);
-        // echo "str_id_club = " . $str_id_club;
-        // sleep(1);
         // $objClub = Club::where('id_club','=',strval($str_id_club));
         return view('club.edit')->with('club',$objClub);
     }
@@ -100,12 +96,10 @@ class ClubController extends Controller
         // $objClub = new Club();
         // en Edit (view camps plens) ... Update (grabar) --> portem un registre existent
         $objClub = Club::find($id);
-
         $objClub->name = $request->get('inpNom');
         $objClub->palmares = $request->get('inpPal');
         $objClub->foundation_year_month = $request->get('inpFun');
         $objClub->office_address = $request->get('inpAdd');
-
         $objClub->save();
         return redirect('/clubs');
     }
