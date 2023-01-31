@@ -1,30 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\Action;
 
-class PlayerController extends Controller
+class ActionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_club, $id_team)
+    public function index()
     {
-        echo "PlayerController - index - id_club=".$id_club." id_team=".$id_team."<br>";
-        die;
-        // ... clubs/2/teams/3/players
-        // ... clubs/{club}/teams{team}/players
-        $fieldsetTeam = Team::select("*")->where('id','=',$id_team);
-        $recordsetPlayers = Player::select("*")->where('team_id','=',$id_team)->get()->sortByDesc('name');
-        if (count($recordsetPlayers) == 0) {
-            echo "no hi ha registres";
-            return view('team.edit')->with('team',$fieldsetTeam);
-        }else{
-            return view('player.index', compact('recordsetPlayers','id_club'));
-        }
+        $recordsetActions = Action::all() ;          
+        return view('action.index')->with('recordsetActions', $recordsetActions);
     }
 
     /**
@@ -34,7 +24,8 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        //   ['minute','match_id','event_id', 'player_id','referee_observations'];
+
     }
 
     /**
