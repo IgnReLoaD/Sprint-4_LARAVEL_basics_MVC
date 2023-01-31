@@ -9,7 +9,8 @@ class Matchh extends Model
 {
     use HasFactory;
     // ATRIBUTS:
-    protected $fillable = ['datetime','journey','home_team_id', 'visitor_team_id','score_home','score_away'];
+    protected $fillable = ['id','datetime','journey','home_team_id', 'visitor_team_id','score_home','score_away'];
+    public $timestamps = false;
 
     // MATCHES 1--N ACTIONS (Right Join) ... hasMany()
     public function actions(){

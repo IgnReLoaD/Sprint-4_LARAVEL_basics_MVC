@@ -17,7 +17,9 @@ use App\Http\Controllers\PlayerController;
 */
 
 Route::get('/', function () {
-    return view('clubs.index');
+    // return view('clubs.index');
+    return view('welcome');
+    die;
 });
 
 // show store create index edit update destroy
@@ -47,10 +49,15 @@ Route::controller(PlayerController::class)->group(function(){
     Route::delete( 'clubs/{club}/teams/{team}/players/{player}/destroy',  'destroy');
 });
 
-// Route::resource('clubs/{club}/teams/{team}/players','App\Http\Controllers\PlayerController'); 
-// Route::get('clubs/{club}/teams/{team}/players', [PlayerController::class, 'index'])->name('player.index');
-// Route::resource('player', PlayerController::class)->names('player');
-// Route::get('clubs/{club}/teams/{team}/players', [PlayerController::class, 'index'])->name('player.index');
+// MATCHES
+Route::controller(MatchhController::class)->group(function(){
+    Route::get( 'matches',  'index');
+    Route::get( 'matches/create',  'create');
+    Route::post('matches/',  'store');
+    Route::get( 'matches/{match}/edit', 'edit');
+    Route::put( 'matches/{match}', 'update');
+    Route::delete('matches/{match}/destroy',  'destroy');
+});
 
 
 // GESTIO USUARIS

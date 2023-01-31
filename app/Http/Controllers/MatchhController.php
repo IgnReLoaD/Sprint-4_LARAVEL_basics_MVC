@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\Matchh;
 
-class MatchController extends Controller
+class MatchhController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,9 @@ class MatchController extends Controller
      */
     public function index()
     {
-        //
+        // DEBUG:
+        echo "MatchController ... index";
+        die;
     }
 
     /**
