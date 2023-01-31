@@ -35,7 +35,7 @@
                 <td>{{ $fieldsetGame->score_away }}</td>
                 <td>{{ $fieldsetGame->visitor_team_id }}</td>
                 <td>
-                    <form action="{{ route ('games.destroy',$fieldsetGame->id) }}" method="post">
+                    <form action="games/{{$fieldsetGame->id}}/destroy" method="post">
                         <a href="/games/{{$fieldsetGame->id}}/edit" class="btn btn-success">editar</a>
                         @csrf 
                         @method('DELETE')
